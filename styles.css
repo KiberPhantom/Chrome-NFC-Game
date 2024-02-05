@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#character-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px; /* Width of your character */
+  height: 100px; /* Height of your character */
+}
+
+#character {
+  width: 100%;
+  height: 100%;
+  background-color: red; /* Placeholder color for the character */
+  background-size: cover;
+}
+
+#candy {
+  width: 20px; /* Width of your candy */
+  height: 20px; /* Height of your candy */
+  background-color: blue; /* Placeholder color for the candy */
+  background-size: cover;
+  position: absolute;
+  display: none;
+}
