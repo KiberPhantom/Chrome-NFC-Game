@@ -1,3 +1,5 @@
+if ('NDEFReader' in window) {
+
 document.addEventListener("DOMContentLoaded", () => {
   const characterContainer = document.getElementById("character-container");
   const character = document.getElementById("character");
@@ -36,3 +38,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attach NFC reading event listener
   document.addEventListener("reading", handleNFCReading);
 });
+} else alert("No no no");
