@@ -8,21 +8,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const ndef = new NDEFReader();
     await ndef.scan();
-    alert("> Scan started");
+    console.log("> Scan started");
 
     ndef.addEventListener("readingerror", () => {
-      alert("Argh! Cannot read data from the NFC tag. Try another one?");
+      console.log("Argh! Cannot read data from the NFC tag. Try another one?");
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
 	  character.style.animation = "none";
 	  character.style.animation = "eat 1s forwards";
 	  spawnCandy();
-      alert(`> Serial Number: ${serialNumber}`);
-      alert(`> Records: (${message.records.length})`);
+      console.log(`> Serial Number: ${serialNumber}`);
+      console.log(`> Records: (${message.records.length})`);
     });
   } catch (error) {
-    alert("Argh! " + error);
+    console.log("Argh! " + error);
   }
   function spawnCandy() {
       candy.style.display = "block";
