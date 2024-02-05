@@ -1,4 +1,5 @@
 if ('NDEFReader' in window) {
+  
 
 document.addEventListener("DOMContentLoaded", () => {
   const characterContainer = document.getElementById("character-container");
@@ -8,16 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Play idle animation initially
   character.style.animation = "idle 1s infinite";
 
-  // Handle NFC reading event
-  function handleNFCReading() {
-    // Stop idle animation
-    character.style.animation = "none";
+  try {
+    const ndef = new NDEFReader();
+    await ndef.scan();
+    //log("> Scan started");
 
-    // Play eat animation
-    character.style.animation = "eat 1s forwards";
+    ndef.addEventListener("readingerror", () => {
+      //log("Argh! Cannot read data from the NFC tag. Try another one?");
+    });
 
-    // Spawn candy
-    spawnCandy();
+    ndef.addEventListener("reading", ({ message, serialNumber }) => {
+      //log(`> Serial Number: ${serialNumber}`);
+      //log(`> Records: (${message.records.length})`);
+      character.style.animation = "none";
+      character.style.animation = "eat 1s forwards";
+      spawnCandy();
+    });
+  } catch (error) {
+    //log("Argh! " + error);
   }
 
   // Function to spawn candy and animate it towards the character
@@ -34,8 +43,5 @@ document.addEventListener("DOMContentLoaded", () => {
       character.style.animation = "idle 1s infinite";
     }, 2000);
   }
-
-  // Attach NFC reading event listener
-  document.addEventListener("reading", handleNFCReading);
 });
 } else alert("No no no");
